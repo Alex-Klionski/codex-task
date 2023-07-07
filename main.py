@@ -1,5 +1,5 @@
 from canvas import Canvas
-from utils import read_file
+from utils import read_file, validate_parameters
 from typing import List
 
 
@@ -27,17 +27,21 @@ class CanvasCommandProcessor:
                 if self.canvas is not None:
                     file.write(f'{self.canvas}\n')
 
+    @validate_parameters
     def create_canvas(self, params: List[str]) -> None:
         self.canvas = Canvas(int(params[0]), int(params[1]))
 
+    @validate_parameters
     def add_line(self, params: List[str]) -> None:
         self._validate_canvas()
         self.canvas.add_line(int(params[0]), int(params[1]), int(params[2]), int(params[3]))
 
+    @validate_parameters
     def add_rectangle(self, params: List[str]) -> None:
         self._validate_canvas()
         self.canvas.add_rectangle(int(params[0]), int(params[1]), int(params[2]), int(params[3]))
 
+    @validate_parameters
     def bucket_fill(self, params: List[str]) -> None:
         self._validate_canvas()
         self.canvas.bucket_fill(int(params[0]), int(params[1]), params[2])
